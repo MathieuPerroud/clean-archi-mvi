@@ -1,0 +1,85 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.bookandgo"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions{
+        jvmTarget = '1.8'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+kapt {
+    generateStubs = true
+}
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation deps.kotlin.stdlib
+    implementation deps.androidx.ktx
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.constraintlayout
+
+    // Support
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
+    implementation project(path: ':common')
+
+    // Features
+    implementation project(path: ':features:booking')
+
+    //Hilt
+    implementation deps.google.dagger.hilt.android
+    kapt deps.google.dagger.hilt.compiler
+    implementation deps.androidx.hilt.lifecycle
+    kapt deps.androidx.hilt.compiler
+
+    //RETROFIT
+    implementation deps.retrofit.lib
+    implementation deps.retrofit.gson
+    implementation deps.retrofit.rx
+
+    //ROOM
+    implementation deps.androidx.room.runtime
+    kapt deps.androidx.room.compiler
+    implementation deps.androidx.room.ktx
+
+    //Coroutines
+    implementation deps.coroutines.android
+
+    //Navigation
+    implementation deps.androidx.navigation.fragment
+    implementation deps.androidx.navigation.ui
+
+
+
+}

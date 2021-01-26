@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.bookandgo.booking.list.BookingListViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/meeting_room"
+            android:scaleType="centerCrop"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#DD000000"
+            />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="#77000000"
+            app:subtitle="Disponible jusque 16h30"
+            app:subtitleTextColor="@color/color_on_primary"
+            app:titleTextColor="@color/color_on_primary"
+            app:title="Salle de réunion 1" />
+
+        <TextView
+            android:id="@+id/tv_availability"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Disponible jusque 16h30"
+            android:textColor="@color/color_primary"
+            android:textSize="@dimen/text_size_xxlarge"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintBottom_toTopOf="@id/container_nearest_booking"
+            />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_nearest_booking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#77C32673"
+            app:layout_constraintTop_toBottomOf="@id/tv_availability"
+            app:layout_constraintBottom_toTopOf="@id/rv_time"
+            >
+
+            <TextView
+                android:id="@+id/tv_next_availability"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="@dimen/high_emphasis_opacity"
+                android:text="Prochaine réservation : 16:30 -> 18:30 "
+                android:textSize="@dimen/text_size_xxlarge"
+                android:textColor="@color/color_on_secondary"
+                android:layout_marginStart="@dimen/size_large_dim"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                android:id="@+id/tv_booker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="@dimen/low_emphasis_opacity"
+                android:layout_margin="@dimen/size_medium_dim"
+                android:layout_marginStart="@dimen/size_large_dim"
+                android:text="Promoteur: Franck MARCHAL. "
+                android:textSize="@dimen/text_size_xlarge"
+                android:textColor="@color/color_on_primary"
+                app:layout_constraintStart_toStartOf="@id/tv_next_availability"
+                app:layout_constraintTop_toBottomOf="@id/tv_next_availability" />
+            <TextView
+                android:id="@+id/tv_attendees"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="@dimen/low_emphasis_opacity"
+                android:layout_marginVertical="@dimen/size_medium_dim"
+                android:text="Participants: Florian BEC, Aria ZARIFIAN, Valentin VIROT, Utilisateur externe 1. "
+                android:textSize="@dimen/text_size_xlarge"
+                android:textColor="@color/color_on_primary"
+                app:layout_constraintStart_toStartOf="@id/tv_booker"
+                app:layout_constraintTop_toBottomOf="@id/tv_booker" />
+            <TextView
+
+                android:id="@+id/tv_articles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="@dimen/low_emphasis_opacity"
+                android:layout_marginVertical="@dimen/size_medium_dim"
+                android:text="Article : Ecrans / Tableau Blanc."
+                android:textSize="@dimen/text_size_xlarge"
+                android:textColor="@color/color_on_primary"
+                app:layout_constraintStart_toStartOf="@id/tv_attendees"
+                app:layout_constraintTop_toBottomOf="@id/tv_attendees" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/cmd_left"
+            android:layout_width="96dp"
+            android:visibility="invisible"
+            android:layout_height="96dp"
+            android:src="@drawable/ic_left"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintTop_toTopOf="@id/rv_time"
+            app:layout_constraintBottom_toBottomOf="@id/rv_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/rv_time"
+            android:layout_margin="1dp"
+            android:background="#222"
+            />
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:tint="@color/color_on_primary"
+            android:visibility="invisible"
+            android:src="@drawable/ic_left"
+            app:layout_constraintTop_toTopOf="@id/cmd_left"
+            app:layout_constraintStart_toStartOf="@id/cmd_left"
+            app:layout_constraintEnd_toEndOf="@id/cmd_left"
+            app:layout_constraintBottom_toBottomOf="@id/cmd_left"
+            />
+<!--        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/size_medium_dim"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cmd_left"
+            app:layout_constraintEnd_toStartOf="@id/cmd_right"
+            tools:listitem="@layout/time_item" />-->
+        <include
+            android:id="@+id/rv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/demo"
+            android:layout_marginBottom="@dimen/size_medium_dim"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cmd_left"
+            app:layout_constraintEnd_toStartOf="@id/cmd_right"/>
+        <View
+            android:id="@+id/cmd_right"
+            android:visibility="invisible"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/ic_right"
+            android:layout_margin="1dp"
+            app:layout_constraintStart_toEndOf="@id/rv_time"
+            app:layout_constraintTop_toTopOf="@id/rv_time"
+            app:layout_constraintBottom_toBottomOf="@id/rv_time"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="#222"
+            />
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:visibility="invisible"
+            app:tint="@color/color_on_primary"
+            android:src="@drawable/ic_right"
+            app:layout_constraintTop_toTopOf="@id/cmd_right"
+            app:layout_constraintStart_toStartOf="@id/cmd_right"
+            app:layout_constraintEnd_toEndOf="@id/cmd_right"
+            app:layout_constraintBottom_toBottomOf="@id/cmd_right"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
