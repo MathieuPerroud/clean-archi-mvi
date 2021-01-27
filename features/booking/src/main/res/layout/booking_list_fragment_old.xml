@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.bookandgo.booking.list.BookingListViewModel" />
+            type="com.bookandgo.booking.bookinglist.BookingListViewModel" />
 
         <import type="android.view.View" />
     </data>

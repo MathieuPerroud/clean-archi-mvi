@@ -5,6 +5,6 @@
 
     <fragment
         android:id="@+id/bookingListFragment"
-        android:name="com.bookandgo.booking.list.BookingListFragment"
+        android:name="com.bookandgo.booking.bookinglist.BookingListFragment"
         android:label="BookingListFragment" />
 </navigation>

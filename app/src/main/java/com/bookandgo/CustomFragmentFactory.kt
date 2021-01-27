@@ -2,7 +2,7 @@ package com.bookandgo
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
-import com.bookandgo.booking.list.BookingListFragment
+import com.bookandgo.booking.bookinglist.BookingListFragment
 
 class CustomFragmentFactory: FragmentFactory() {
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {

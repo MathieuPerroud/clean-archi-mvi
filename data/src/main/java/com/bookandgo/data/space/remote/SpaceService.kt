@@ -49,7 +49,7 @@ class SpaceService(private val api: API) : CallService(), SpaceRemote {
             return Either.Failure(
                 HttpResultFailure(
                     httpCode = code,
-                    exception = RemoteTimeoutException()
+                    exception = RemoteTimeoutException("Timeout : Erreur $code")
                 )
             )
         }
