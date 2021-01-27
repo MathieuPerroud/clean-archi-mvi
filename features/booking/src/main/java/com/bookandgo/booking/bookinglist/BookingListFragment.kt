@@ -17,6 +17,11 @@ class BookingListFragment : BaseBookingListFragment() {
                 setPeekHeight(200)
                 expand()
             }
+            toolbar.setOnClickListener {
+                viewModel.dispatchIntent(
+                    BookingListIntent.ShowSpaces
+                )
+            }
             rvPlaces.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter = SpacesRecyclerAdapter { space ->
@@ -31,16 +36,20 @@ class BookingListFragment : BaseBookingListFragment() {
     override fun renderState(viewState: BookingListState) {
         with(viewBinding) {
             with(viewState){
-                triggeredEvents.forEach { event ->
-                    when(event) {
-                        is BookingListState.Event.PopSnackBar -> popSnackbar(event.message, Snackbar.LENGTH_LONG)
+                triggeredEvents.apply {
+                    forEach { event ->
+                        when(event) {
+                            is BookingListState.Event.PopSnackBar -> popSnackbar(event.message, Snackbar.LENGTH_LONG)
+                            is BookingListState.Event.ToggleBottomSheet ->
+                                if (collapsed)contentBottomSheet.expand() else contentBottomSheet.collapse()
+                        }
+                        poll()
                     }
                 }
-                toolbar.setOnClickListener {
-                   if (collapsed)contentBottomSheet.expand() else contentBottomSheet.collapse()
-                }
-                rvPlaces.requireSpacesRecyclerAdapter().updateDataList(spaces)
             }
+
+            rvPlaces.requireSpacesRecyclerAdapter().updateDataList(viewState.spaces)
+
         }
     }
 }

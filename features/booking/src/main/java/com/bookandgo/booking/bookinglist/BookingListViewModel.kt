@@ -25,29 +25,27 @@ class BookingListViewModel @ViewModelInject constructor(private val getAllSpaces
     override fun intentToAction(intent: BookingListIntent): Array<Action> {
         return when(intent){
             is SpaceSelected -> arrayOf(Action.SelectSpace(intent.space))
+            is ShowSpaces -> arrayOf(Action.SwitchBottomSheetState)
         }
     }
 
     override fun handleAction(action: Action) {
         launch{
-
-
-            when(val holder = handlingGetAllSpaces()){
-                is GetAllSpacesPresenter.NoDataHolder ->{
-                    //stop loading send(PartialStateStopLoading)
-                    //launch success animation send(LaunchSuccessAnimation)
-                    //display info send(SlotSuccessfulyRetrieved)
+            return@launch when(action){
+                is Action.SelectSpace -> {}
+                is Action.GetAllSpaces -> {
+                    when(val holder = handlingGetAllSpaces()){
+                        is GetAllSpacesPresenter.RandomFailureHolder ->
+                            stateChannel.send(BookingListPartialState.SpacesNotRetrieved(holder.message))
+                        is GetAllSpacesPresenter.SuccessfulHolder ->
+                            stateChannel.send(BookingListPartialState.SpacesRetrieved(holder.spaces))
+                        else ->  stateChannel.send(BookingListPartialState.SpacesNotRetrieved("What did just happened ?"))
                     }
-                is GetAllSpacesPresenter.RandomFailureHolder -> {
-                    stateChannel.send(BookingListPartialState.SpacesNotRetrieved(holder.message))
                 }
-                is GetAllSpacesPresenter.SuccessfulHolder -> {
-                    //stop loading send(PartialStateStopLoading)
-                    //launch success animation send(LaunchSuccessAnimation)
-                    //display info send(SlotSuccessfulyRetrieved)
-                    stateChannel.send(BookingListPartialState.SpacesRetrieved(holder.spaces))
-                }
+                is Action.SwitchBottomSheetState -> stateChannel.send(BookingListPartialState.BottomSheetToggled)
             }
+
+
 
         }
     }
@@ -57,5 +55,6 @@ class BookingListViewModel @ViewModelInject constructor(private val getAllSpaces
     sealed class Action {
         data class SelectSpace(val space: EffectiveSpace) : Action()
         object GetAllSpaces : Action()
+        object SwitchBottomSheetState : BookingListViewModel.Action()
     }
 }

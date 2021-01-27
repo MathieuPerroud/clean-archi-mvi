@@ -11,12 +11,13 @@ data class BookingListState(
     val placeAvailable: Boolean = false,
     val title: String = "Salle 1",
     val selectingSpace: Boolean = false,
-    val triggeredEvents: Queue<Event> = ArrayBlockingQueue(6),
+    val triggeredEvents: Queue<Event> = ArrayBlockingQueue(4),
     val spaces: List<EffectiveSpace> = emptyList(),
     val currentSpace: EffectiveSpace? = null,
     val collapsed: Boolean = false
 ) {
     sealed class Event {
         data class PopSnackBar(val message: String) : Event()
+        object ToggleBottomSheet : Event()
     }
 }

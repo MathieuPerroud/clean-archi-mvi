@@ -18,6 +18,10 @@ class BookingListReducer : IReducer<BookingListState, BookingListPartialState> {
             is SpacesNotRetrieved -> state.copy(
                 triggeredEvents = state.triggeredEvents.apply { add(Event.PopSnackBar(partialState.message?:"An error occurred")) }
             )
+            is BottomSheetToggled -> state.copy(
+                triggeredEvents = state.triggeredEvents.apply { add(Event.ToggleBottomSheet) },
+                collapsed = !state.collapsed
+            )
         }
     }
 }
