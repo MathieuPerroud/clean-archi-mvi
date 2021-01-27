@@ -1,11 +1,10 @@
 package com.bookandgo.domain.contracts.presenters
 
 import com.bookandgo.domain.contracts.presenters.holders.UseCasePresenterHolder
-import com.bookandgo.domain.contracts.UseCaseResponse
+import com.bookandgo.domain.contracts.IUseCaseResponse
+import com.bookandgo.domain.contracts.responses.exceptions.DataAccessException
 
-interface  IUseCasePresenter<Response: UseCaseResponse<*>> {
-
+interface  IUseCasePresenter<Response: IUseCaseResponse> {
     var holder: UseCasePresenterHolder
     suspend fun present(response: Response)
-
 }

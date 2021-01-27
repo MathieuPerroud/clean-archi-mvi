@@ -13,6 +13,12 @@ class BookingListViewModel @ViewModelInject constructor(private val getAllSpaces
     MVIViewModel<BookingListState, BookingListIntent, BookingListPartialState, BookingListViewModel.Action>
         (BookingListReducer()) {
 
+    init {
+        launch {
+            handlingGetAllSpaces()
+        }
+    }
+
     override fun createInitialState() = BookingListState()
 
     override fun intentToAction(intent: BookingListIntent): Array<Action> {

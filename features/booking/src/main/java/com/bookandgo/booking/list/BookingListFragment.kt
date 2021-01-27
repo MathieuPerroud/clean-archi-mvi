@@ -7,7 +7,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class BookingListFragment:BaseBookingListFragment() {
 
     override fun setupViews() {
-
     }
 
     override fun renderState(viewState: BookingListState) {
