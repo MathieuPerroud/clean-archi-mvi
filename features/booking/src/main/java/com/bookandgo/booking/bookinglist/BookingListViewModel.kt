@@ -24,7 +24,7 @@ class BookingListViewModel @ViewModelInject constructor(private val getAllSpaces
 
     override fun intentToAction(intent: BookingListIntent): Array<Action> {
         return when(intent){
-            is SpaceSelected -> arrayOf(Action.SelectSpace(intent.space))
+            is SpaceSelected -> arrayOf(Action.SwitchBottomSheetState,Action.SelectSpace(intent.space))
             is ShowSpaces -> arrayOf(Action.SwitchBottomSheetState)
         }
     }
@@ -32,19 +32,22 @@ class BookingListViewModel @ViewModelInject constructor(private val getAllSpaces
     override fun handleAction(action: Action) {
         launch{
             return@launch when(action){
-                is Action.SelectSpace -> {}
+                is Action.SelectSpace -> {
+                    stateChannel.send(BookingListPartialState.NewSpaceSelected(action.space))
+                }
                 is Action.GetAllSpaces -> {
                     when(val holder = handlingGetAllSpaces()){
                         is GetAllSpacesPresenter.RandomFailureHolder ->
                             stateChannel.send(BookingListPartialState.SpacesNotRetrieved(holder.message))
-                        is GetAllSpacesPresenter.SuccessfulHolder ->
+                        is GetAllSpacesPresenter.SuccessfulHolder ->{
                             stateChannel.send(BookingListPartialState.SpacesRetrieved(holder.spaces))
+                            handleAction(Action.SelectSpace(EffectiveSpace(holder.spaces.first()) ))
+                        }
                         else ->  stateChannel.send(BookingListPartialState.SpacesNotRetrieved("What did just happened ?"))
                     }
                 }
                 is Action.SwitchBottomSheetState -> stateChannel.send(BookingListPartialState.BottomSheetToggled)
             }
-
 
 
         }

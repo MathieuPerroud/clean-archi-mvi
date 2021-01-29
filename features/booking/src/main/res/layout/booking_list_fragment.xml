@@ -15,47 +15,106 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_primary"
-        >
+        android:background="@color/color_primary">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/cmd_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="20dp"
+            app:layout_constraintStart_toStartOf="@id/toolbar"
+            app:layout_constraintTop_toTopOf="@id/toolbar"
+            app:layout_constraintBottom_toBottomOf="@id/toolbar"
+            app:layout_constraintEnd_toEndOf="@id/toolbar"
+            android:src="@drawable/ic_house"/>
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
             android:background="#77000000"
-            android:elevation="8dp"
-            app:subtitle="Disponible jusque 16h30"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:title="titre"
+            tools:subtitle="subtitre"
+            app:subtitle="@{viewmodel.state.value.currentSpace.available?`Disponible`: `Occupé`}"
             app:subtitleTextColor="@color/color_on_primary"
-            app:titleTextColor="@color/color_on_primary"
-            app:title="@{viewmodel.state.value.title}" />
+            app:title="@{viewmodel.state.value.currentSpace.name}"
+            app:titleTextColor="@color/color_on_primary" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPlaces"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"/>
+            android:paddingBottom="@dimen/size_small_dim"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <com.bookandgo.common.components.bottomsheet.BottomSheet
+                android:id="@+id/content_bottom_sheet"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/content_bottom_sheet"
                 app:behavior_hideable="false"
                 app:layout_behavior="com.bookandgo.common.components.bottomsheet.LockableBottomSheetBehavior"
                 >
+<!--
+                app:layout_behavior="com.bookandgo.common.components.bottomsheet.LockableBottomSheetBehavior"
+-->
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guide_25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.25" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guide_45"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.45" />
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/meeting_room"
                     android:scaleType="centerCrop"
-                    />
+                    android:src="@drawable/meeting_room" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#DD000000"
-                    />
+                    android:background="#DD000000" />
+
+                <TextView
+                    android:id="@+id/tv_availability"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Disponible jusque 16h30"
+                    android:textColor="@color/color_primary"
+                    android:textSize="@dimen/text_size_xxlarge"
+                    app:layout_constraintBottom_toTopOf="@id/guide_25"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <include
+                    android:id="@+id/booking_list_reservation_space"
+                    layout="@layout/booking_list_reservation_space"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@id/guide_45"
+                    app:layout_constraintTop_toBottomOf="@id/guide_25" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_slots"
+                    android:layout_width="wrap_content"
+                    android:layout_height="294dp"
+                    android:layout_margin="@dimen/size_medium_dim"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
             </com.bookandgo.common.components.bottomsheet.BottomSheet>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

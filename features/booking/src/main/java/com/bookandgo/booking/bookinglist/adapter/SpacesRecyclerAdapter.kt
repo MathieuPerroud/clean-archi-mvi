@@ -29,14 +29,15 @@ class SpacesRecyclerAdapter(private val spaceSelected: (EffectiveSpace) -> Unit)
     override fun getItemCount(): Int = spaces.size
     
     fun updateDataList(newData: List<EffectiveSpace>) {
-        spaces = ArrayList(newData.sortedBy { s -> s.available })
+        spaces = ArrayList(newData.sortedBy { s -> s.isAvailable() })
         notifyDataSetChanged()
     }
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         fun bindProduct(item: EffectiveSpace, spaceSelected: (EffectiveSpace) -> Unit ) {
             view.name.text = item.name
-            view.availability.text = if (item.available)"Disponible" else "Occupé"
-
+            view.name.setOnClickListener {spaceSelected(item)}
+            view.availability.text = if (item.isAvailable())"Disponible" else "Occupé"
+            itemView.setOnClickListener {spaceSelected(item)}
         }
     }
 }

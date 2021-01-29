@@ -70,11 +70,12 @@ abstract class MVIFragment<State, Intent, Binding : ViewDataBinding, VM: StateIn
         super.onViewCreated(view, savedInstanceState)
         viewBinding.lifecycleOwner = viewLifecycleOwner
         viewBinding.setVariable(viewModelVariable, viewModel)
-
-        setupViews()
-
     }
 
+    override fun onStart() {
+        super.onStart()
+        setupViews()
+    }
 
     private var request: Job? = null
     override fun onResume() {

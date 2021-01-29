@@ -3,6 +3,7 @@ package com.bookandgo.common.components.bottomsheet
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.bookandgo.common.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -11,7 +12,7 @@ class BottomSheet @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : CoordinatorLayout(context, attrs, defStyleAttr)  {
+) : ConstraintLayout(context, attrs, defStyleAttr)  {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<BottomSheet>
     init {
 
@@ -24,9 +25,10 @@ class BottomSheet @JvmOverloads constructor(
         )
     }
 
-    fun initBehavior() {
+    fun initBehavior() :BottomSheet {
         bottomSheetBehavior = BottomSheetBehavior.from(this@BottomSheet)
         //bottomSheetBehavior.isDraggable = true
+        return this
     }
     fun setPeekHeight(peekHeight: Int) {
         bottomSheetBehavior.peekHeight = peekHeight

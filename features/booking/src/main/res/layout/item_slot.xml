@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="slot"
+            type="com.bookandgo.booking.bookinglist.adapter.slot.SlotItem" />
+    </data>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/value"
+    android:layout_width="96dp"
+    android:layout_height="96dp"
+    android:layout_margin="1dp"
+    android:background="@{slot.available?@color/color_primary: @color/color_secondary}"
+    tools:background="@color/color_secondary"
+    android:gravity="center"
+    tools:text="13:15"
+    android:textColor="@color/color_on_secondary"
+    android:textSize="@dimen/text_size_xlarge" />
+
+</layout>

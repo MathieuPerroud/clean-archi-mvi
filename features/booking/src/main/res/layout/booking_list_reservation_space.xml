@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <variable name="booking" type="com.bookandgo.booking.bookinglist.models.EffectiveBooking" />
+        <variable name="cash" type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_nearest_booking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/size_large_dim"
+        android:background="#77C32673">
+
+        <TextView
+            android:id="@+id/tv_next_availability"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="@dimen/high_emphasis_opacity"
+            android:text="Prochaine réservation : 16:30 -> 18:30 "
+            android:textSize="@dimen/text_size_xxlarge"
+            android:textColor="@color/color_on_secondary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_booker"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/tv_booker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="@dimen/low_emphasis_opacity"
+            android:text="Promoteur: Franck MARCHAL. "
+            android:textSize="@dimen/text_size_xlarge"
+            android:textColor="@color/color_on_primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_next_availability"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+        <!--<TextView
+            android:id="@+id/tv_attendees"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="@dimen/low_emphasis_opacity"
+            android:layout_marginVertical="@dimen/size_medium_dim"
+            android:text="Participants: Florian BEC, Aria ZARIFIAN, Valentin VIROT, Utilisateur externe 1. "
+            android:textSize="@dimen/text_size_xlarge"
+            android:textColor="@color/color_on_primary"
+            app:layout_constraintStart_toStartOf="@id/tv_booker"
+            app:layout_constraintTop_toBottomOf="@id/tv_booker" />
+        <TextView
+
+            android:id="@+id/tv_articles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="@dimen/low_emphasis_opacity"
+            android:layout_marginVertical="@dimen/size_medium_dim"
+            android:text="Article : Ecrans / Tableau Blanc."
+            android:textSize="@dimen/text_size_xlarge"
+            android:textColor="@color/color_on_primary"
+            app:layout_constraintStart_toStartOf="@id/tv_attendees"
+            app:layout_constraintTop_toBottomOf="@id/tv_attendees" />-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
