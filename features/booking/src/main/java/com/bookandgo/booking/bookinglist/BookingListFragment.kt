@@ -65,7 +65,9 @@ class BookingListFragment : BaseBookingListFragment() {
                 toolbar.subtitle = currentSpace?.getAvailabilityDescription() ?: ""
                 tvAvailability.text = currentSpace?.getAvailabilityDescription() ?: ""
                 tv_booker.text ="Promoteur : "+ closestBooking?.owner
-                tv_next_availability.text = "Prochaine réservation : "+closestBooking?.toString()
+                if (currentSpace != null) {
+                    tv_next_availability.text = (if (currentSpace.isAvailable()) "Prochaine réservation : " else "Réservation en cours : ") + closestBooking?.toString()
+                }
             }
             rvPlaces.requireSpacesRecyclerAdapter().updateDataList(viewState.spaces)
 

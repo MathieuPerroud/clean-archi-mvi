@@ -22,13 +22,18 @@ open class EffectiveSpace(
         bookedSlots
     )
 
-    fun getClosestBooking(hours: Int): Booking =
-        this.bookings.first { hours<= it.end.hours || it.start.hours >= hours }
+    fun getClosestBooking(hours: Int): Booking? =
+            this.bookings.firstOrNull { hours<= it.end.hours || it.start.hours >= hours }
 
-    fun isAvailable():Boolean = !checkIfBetween(getClosestBooking(getCurrentHour()).start, getClosestBooking(getCurrentHour()).end,8,0)
+
+    fun isAvailable(): Boolean =
+        getClosestBooking(getCurrentHour())?.let{
+            !checkIfBetween(it.start, it.end,getCurrentHour(),0)
+        }?:false
+
 
     fun getAvailabilityDescription() =if(isAvailable())
-        "Disponible jusque "+ getClosestBooking(getCurrentHour()).start.toString()
+        "Disponible jusqu'à "+ getClosestBooking(getCurrentHour())?.start.toString()
     else
-        "Occupé jusque"+ getClosestBooking(getCurrentHour()).end.toString()
+        "Occupé jusqu'à"+ getClosestBooking(getCurrentHour())?.end.toString()
 }

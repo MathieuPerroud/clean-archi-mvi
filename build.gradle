@@ -84,6 +84,8 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.2"
+        classpath 'com.google.gms:google-services:4.3.5'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.4.1'
         classpath deps.kotlin.plugin
         classpath deps.androidx.navigation.safeargs
         classpath deps.google.dagger.hilt.plugin

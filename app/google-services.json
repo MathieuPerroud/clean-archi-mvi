@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "126960271191",
+    "project_id": "bookandgo-69a09",
+    "storage_bucket": "bookandgo-69a09.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126960271191:android:6e34e66ac5ed7d0edd0812",
+        "android_client_info": {
+          "package_name": "com.bookandgo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "126960271191-6h68va25s03ue7lmqv41l84a1cjpit4n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3wbgQlCDHkuCQmk33Jtxu_uD5hqlnhhs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "126960271191-6h68va25s03ue7lmqv41l84a1cjpit4n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

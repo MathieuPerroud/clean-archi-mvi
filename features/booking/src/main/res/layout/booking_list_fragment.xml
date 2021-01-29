@@ -91,7 +91,7 @@
                     android:id="@+id/tv_availability"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="Disponible jusque 16h30"
+                    tools:text="Disponible jusqu'à 16h30"
                     android:textColor="@color/color_primary"
                     android:textSize="@dimen/text_size_xxlarge"
                     app:layout_constraintBottom_toTopOf="@id/guide_25"
@@ -110,7 +110,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_slots"
                     android:layout_width="wrap_content"
-                    android:layout_height="294dp"
+                    android:layout_height="298dp"
                     android:layout_margin="@dimen/size_medium_dim"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
